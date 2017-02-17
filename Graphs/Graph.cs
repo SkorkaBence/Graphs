@@ -85,20 +85,19 @@ namespace Graphs {
         }
 
         public void createRandomGraph() {
-            reset();
-            Random r = new Random();
+            createRandomGraph(rand.Next(10, 15), rand.Next(10, 15));
+        }
 
-            int max1 = r.Next(5, 15);
-            for (int i = 0; i < max1; i++) {
+        public void createRandomGraph(int v, int e) {
+            reset();
+            for (int i = 0; i < v; i++) {
                 createNewPoint();
             }
-
-            int max2 = r.Next(5, 15);
-            for (int i = 0; i < max2; i++) {
+            for (int i = 0; i < e; i++) {
                 int p1, p2;
                 do {
-                    p1 = r.Next(points.Count());
-                    p2 = r.Next(points.Count());
+                    p1 = rand.Next(points.Count());
+                    p2 = rand.Next(points.Count());
                 } while (p1 == p2);
 
                 createNewConnection(points[p1], points[p2]);
