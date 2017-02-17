@@ -286,6 +286,10 @@ namespace Graphs {
         }
 
         public string boolString() {
+            return boolString(true);
+        }
+
+        public string boolString(bool triangular) {
             string data = points.Count() + "";
             bool[,] bdata = convertToBoolArray();
 
@@ -293,8 +297,12 @@ namespace Graphs {
                 data += "\n";
                 for (int y = 0; y < points.Count(); y++) {
                     data += " ";
-                    if (bdata[x, y]) {
-                        data += "1";
+                    if (y >= x || !triangular) {
+                        if (bdata[x, y]) {
+                            data += "1";
+                        } else {
+                            data += "0";
+                        }
                     } else {
                         data += "0";
                     }
@@ -315,8 +323,10 @@ namespace Graphs {
             for (int x = 0; x < pointcount; x++) {
                 string[] dmt = lines[x + 1].Split(' ');
                 for (int y = 0; y < pointcount; y++) {
-                    if (dmt[y + 1] != "0") {
-                        createNewConnection(points[x], points[y]);
+                    if (dmt[y + 1] != "_") {
+                        if (dmt[y + 1] != "0") {
+                            createNewConnection(points[x], points[y]);
+                        }
                     }
                 }
             }
