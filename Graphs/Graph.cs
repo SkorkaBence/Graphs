@@ -229,6 +229,10 @@ namespace Graphs {
         public bool generateGraphFromDegree(int[] val) {
             reset();
 
+            if (!isGraphic(val)) {
+                return false;
+            }
+
             Array.Sort(val);
             val.Reverse();
 
@@ -376,6 +380,47 @@ namespace Graphs {
             }
 
             return components;
+        }
+
+        public Graph getLineGraph() {
+            Graph re = new Graph();
+
+            for (int i = 0; i < connections.Count(); i++) {
+                re.createNewPoint();
+            }
+
+            for (int x = 0; x < re.getPoints().Count(); x++) {
+                for (int y = 0; y < re.getPoints().Count(); y++) {
+                    if (x != y) {
+                        if (connections[x].isPointConnected(connections[y].getId1()) || connections[x].isPointConnected(connections[y].getId2())) {
+                            re.createNewConnection(re.getPoints()[x], re.getPoints()[y]);
+                        }
+                    }
+                }
+            }
+
+            return re;
+        }
+
+        public bool isGraphic(int[] graphpoints) {
+            Array.Sort(graphpoints);
+            Array.Reverse(graphpoints);
+
+            if (graphpoints.Length == 0) {
+                return true;
+            }
+
+            List<int> temp = graphpoints.ToList();
+            temp.RemoveAt(0);
+            if (graphpoints[0] > temp.Count()) {
+                return false;
+            }
+            for (int i = 0; i < graphpoints[0]; i++) {
+                temp[i]--;
+            }
+            int[] newpoints = temp.ToArray();
+
+            return isGraphic(newpoints);
         }
 
         public static bool operator ==(Graph c1, Graph c2) {
