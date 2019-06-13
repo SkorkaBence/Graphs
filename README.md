@@ -2,8 +2,8 @@
 My C# graph library
 
 ## First steps
-### New Graph objectum
-Create a new Graph objectum:
+### New Graph object
+Create a new Graph object:
 ```C#
 Graph graph = new Graph();
 ```
@@ -94,7 +94,7 @@ if (graph1 == graph2) {
 
 }
 ```
-*Note, that this perator does not check for isomorphism*
+*Note, that this operator does not check for isomorphism*
 ### Complementer
 To get a graphs complementer use the following operator:
 ```C#
